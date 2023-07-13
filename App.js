@@ -1,6 +1,7 @@
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
 import Header from "./src/components/Header";
 import { COLORS } from "./src/theme/colors";
+import Input from "./src/components/Input";
 
 export default function App() {
   return (
@@ -9,7 +10,7 @@ export default function App() {
 
       <Header />
 
-      <Text>My List!</Text>
+      <Input />
     </SafeAreaView>
   );
 }
