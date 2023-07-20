@@ -12,9 +12,10 @@ import { COLORS } from "./src/theme/colors";
 import Input from "./src/components/Input";
 import Button from "./src/components/Button";
 import EmptyIcon from "./src/assets/clipboard.png";
+import Item from "./src/components/Item";
 
 export default function App() {
-  const list = [];
+  const list = ["Marcos", "Vitor", "Nicholas"];
 
   const renderEmptyList = () => (
     <View style={styles.empty}>
@@ -39,9 +40,12 @@ export default function App() {
       <FlatList
         data={list}
         keyExtractor={(item) => item}
-        renderItem={({ item }) => (
-          <Text style={{ color: "white" }}>{item}</Text>
-        )}
+        renderItem={({ item }) => <Item data={item} />}
+        contentContainerStyle={{
+          paddingTop: 16,
+          paddingHorizontal: 24,
+          gap: 8,
+        }}
         ListEmptyComponent={() => renderEmptyList()}
       />
     </SafeAreaView>
