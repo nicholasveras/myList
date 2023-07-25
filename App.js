@@ -13,9 +13,13 @@ import Input from "./src/components/Input";
 import Button from "./src/components/Button";
 import EmptyIcon from "./src/assets/clipboard.png";
 import Item from "./src/components/Item";
+import { useState } from "react";
 
 export default function App() {
-  const list = ["Marcos", "Vitor", "Nicholas"];
+  const [list, setList] = useState([]);
+  const [task, setTask] = useState("");
+
+  console.log("Lista: ", list);
 
   const renderEmptyList = () => (
     <View style={styles.empty}>
@@ -26,6 +30,13 @@ export default function App() {
       </Text>
     </View>
   );
+
+  function handleAddTask() {
+    console.log("clicou, valor de task: ", task);
+
+    setList((prevState) => [...prevState, task]); // pega o estado atual da lista e adiciona o novo item
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
@@ -33,8 +44,8 @@ export default function App() {
       <Header />
 
       <View style={styles.input}>
-        <Input />
-        <Button />
+        <Input defaultValue={task} onChangeText={(text) => setTask(text)} />
+        <Button onPress={handleAddTask} />
       </View>
 
       <FlatList
