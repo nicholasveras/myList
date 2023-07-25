@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   Image,
   SafeAreaView,
@@ -32,9 +33,15 @@ export default function App() {
   );
 
   function handleAddTask() {
-    console.log("clicou, valor de task: ", task);
+    if (task.trim() === "") return; // trim() remove espaços em branco do inicio e do fim da string
+
+    if (list.includes(task)) {
+      return Alert.alert("Tarefa existente", "Digite outra tarefa");
+    }
 
     setList((prevState) => [...prevState, task]); // pega o estado atual da lista e adiciona o novo item
+    // limpando input
+    setTask("");
   }
 
   return (
@@ -53,6 +60,7 @@ export default function App() {
         keyExtractor={(item) => item}
         renderItem={({ item }) => <Item data={item} />}
         contentContainerStyle={{
+          flexDirection: "column-reverse", // inverte a ordem da lista
           paddingTop: 16,
           paddingHorizontal: 24,
           gap: 8,
