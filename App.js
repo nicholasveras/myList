@@ -19,6 +19,7 @@ import { useState } from "react";
 export default function App() {
   const [list, setList] = useState([]);
   const [task, setTask] = useState("");
+  const [listConcluded, setListConcluded] = useState([]);
 
   console.log("Lista: ", list);
 
@@ -44,6 +45,11 @@ export default function App() {
     setTask("");
   }
 
+  function handleSelectTask(itemSelected) {
+    //espera receber o item selecionado
+    console.log("selecionou", itemSelected); // mostra no console o item selecionado
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
@@ -60,7 +66,7 @@ export default function App() {
           <Text style={styles.type}>Criadas</Text>
 
           <View style={styles.qtdView}>
-            <Text style={styles.qtdNumber}>0</Text>
+            <Text style={styles.qtdNumber}>{list.length}</Text>
           </View>
         </View>
 
@@ -78,7 +84,9 @@ export default function App() {
       <FlatList
         data={list}
         keyExtractor={(item) => item}
-        renderItem={({ item }) => <Item data={item} />}
+        renderItem={({ item }) => (
+          <Item data={item} checked={handleSelectTask} /> // checked é a função, enviada para o componente
+        )}
         contentContainerStyle={{
           flexDirection: "column-reverse", // inverte a ordem da lista
           paddingTop: 8,
