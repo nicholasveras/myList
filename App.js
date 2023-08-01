@@ -48,6 +48,8 @@ export default function App() {
   function handleSelectTask(itemSelected) {
     //espera receber o item selecionado
     console.log("selecionou", itemSelected); // mostra no console o item selecionado
+
+    setListConcluded((currentState) => [...currentState, itemSelected]); // adiciona o item selecionado na lista de concluidos
   }
 
   return (
@@ -76,7 +78,8 @@ export default function App() {
           </Text>
 
           <View style={styles.qtdView}>
-            <Text style={styles.qtdNumber}>0</Text>
+            {/* mostra a quantidade de itens concluidos  */}
+            <Text style={styles.qtdNumber}>{listConcluded.length}</Text>
           </View>
         </View>
       </View>
