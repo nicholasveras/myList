@@ -19,6 +19,7 @@ import { useState } from "react";
 export default function App() {
   const [list, setList] = useState([]);
   const [task, setTask] = useState("");
+  const [listConcluded, setListConcluded] = useState([]);
 
   console.log("Lista: ", list);
 
@@ -44,6 +45,20 @@ export default function App() {
     setTask("");
   }
 
+  function handleSelectTask(itemSelected) {
+    //espera receber o item selecionado
+    console.log("selecionou", itemSelected); // mostra no console o item selecionado
+
+    if (listConcluded.includes(itemSelected)) {
+      setListConcluded((currentState) =>
+        currentState.filter((items) => items !== itemSelected)
+      ); // remove o item selecionado da lista de concluídos
+      return; // parar a execução da função
+    }
+
+    setListConcluded((currentState) => [...currentState, itemSelected]); // adiciona o item selecionado na lista de concluidos
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
@@ -55,14 +70,38 @@ export default function App() {
         <Button onPress={handleAddTask} />
       </View>
 
+      <View style={styles.info}>
+        <View style={styles.typeView}>
+          <Text style={styles.type}>Criadas</Text>
+
+          <View style={styles.qtdView}>
+            <Text style={styles.qtdNumber}>{list.length}</Text>
+          </View>
+        </View>
+
+        <View style={styles.typeView}>
+          <Text style={[styles.type, { color: COLORS.blue500 }]}>
+            Concluídas
+          </Text>
+
+          <View style={styles.qtdView}>
+            {/* mostra a quantidade de itens concluidos  */}
+            <Text style={styles.qtdNumber}>{listConcluded.length}</Text>
+          </View>
+        </View>
+      </View>
+
       <FlatList
         data={list}
         keyExtractor={(item) => item}
-        renderItem={({ item }) => <Item data={item} />}
+        renderItem={({ item }) => (
+          <Item data={item} checked={handleSelectTask} /> // checked é a função, enviada para o componente
+        )}
         contentContainerStyle={{
           flexDirection: "column-reverse", // inverte a ordem da lista
-          paddingTop: 16,
+          paddingTop: 8,
           paddingHorizontal: 24,
+          paddingBottom: 48,
           gap: 8,
         }}
         ListEmptyComponent={() => renderEmptyList()}
@@ -91,5 +130,38 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "bold",
     marginTop: 16,
+  },
+  info: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 32,
+    marginHorizontal: 24,
+    paddingBottom: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.gray500,
+  },
+  typeView: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  type: {
+    fontSize: 16,
+    color: COLORS.ciano,
+    fontWeight: "bold",
+  },
+  qtdView: {
+    backgroundColor: COLORS.gray500,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 99,
+    marginLeft: 8,
+  },
+  qtdNumber: {
+    fontSize: 13,
+    color: COLORS.white,
+    fontWeight: "bold",
   },
 });
