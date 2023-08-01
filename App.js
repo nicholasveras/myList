@@ -49,6 +49,13 @@ export default function App() {
     //espera receber o item selecionado
     console.log("selecionou", itemSelected); // mostra no console o item selecionado
 
+    if (listConcluded.includes(itemSelected)) {
+      setListConcluded((currentState) =>
+        currentState.filter((items) => items !== itemSelected)
+      ); // remove o item selecionado da lista de concluídos
+      return; // parar a execução da função
+    }
+
     setListConcluded((currentState) => [...currentState, itemSelected]); // adiciona o item selecionado na lista de concluidos
   }
 
