@@ -1,3 +1,5 @@
+import "react-native-gesture-handler";
+import { useState } from "react";
 import {
   Alert,
   FlatList,
@@ -8,13 +10,12 @@ import {
   Text,
   View,
 } from "react-native";
-import Header from "./src/components/Header";
-import { COLORS } from "./src/theme/colors";
-import Input from "./src/components/Input";
-import Button from "./src/components/Button";
 import EmptyIcon from "./src/assets/clipboard.png";
+import Button from "./src/components/Button";
+import Header from "./src/components/Header";
+import Input from "./src/components/Input";
 import Item from "./src/components/Item";
-import { useState } from "react";
+import { COLORS } from "./src/theme/colors";
 
 export default function App() {
   const [list, setList] = useState([]);
@@ -100,7 +101,7 @@ export default function App() {
         contentContainerStyle={{
           flexDirection: "column-reverse", // inverte a ordem da lista
           paddingTop: 8,
-          paddingHorizontal: 24,
+          //paddingHorizontal: 24,
           paddingBottom: 48,
           gap: 8,
         }}
