@@ -8,7 +8,7 @@ import {
   RectButton,
 } from "react-native-gesture-handler";
 
-export default function Item({ data, checked }) {
+export default function Item({ data, checked, remove }) {
   // checked é a função que vem do componente pai (espera receber um item selecionado)
   const [selected, setSelected] = useState(false);
 
@@ -25,7 +25,7 @@ export default function Item({ data, checked }) {
         renderRightActions={() => (
           <RectButton
             style={styles.trash}
-            onPress={() => console.log("remover")}
+            onPress={() => remove(data)}
             activeOpacity={0.6}
           >
             <Feather name="trash" size={20} color="white" />

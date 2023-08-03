@@ -60,6 +60,34 @@ export default function App() {
     setListConcluded((currentState) => [...currentState, itemSelected]); // adiciona o item selecionado na lista de concluidos
   }
 
+  function HandleRemoveTask(itemToRemove) {
+    console.log("remover", itemToRemove);
+
+    Alert.alert(
+      "Remover tarefa",
+      `Deseja remover essa tarefa?\n"${itemToRemove}"`, // \n quebra de linha
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Remover",
+          onPress: () => {
+            setList((currentState) =>
+              currentState.filter((tasks) => tasks !== itemToRemove)
+            );
+
+            // remover também da lista de concluídos
+            setListConcluded((currentState) =>
+              currentState.filter((tasks) => tasks !== itemToRemove)
+            );
+          },
+        },
+      ]
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
@@ -96,7 +124,11 @@ export default function App() {
         data={list}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
-          <Item data={item} checked={handleSelectTask} /> // checked é a função, enviada para o componente
+          <Item
+            data={item}
+            checked={handleSelectTask} // checked é a função, enviada para o componente
+            remove={HandleRemoveTask}
+          />
         )}
         contentContainerStyle={{
           flexDirection: "column-reverse", // inverte a ordem da lista
