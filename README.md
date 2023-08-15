@@ -47,4 +47,4 @@ bash
 
 <img src='https://github.com/MarcosVel/myList/assets/62637265/3a8a3768-4234-4cb3-a0df-d536d0304977' width='400' />
 
-<img src='https://github.com/MarcosVel/myList/assets/62637265/e9c64a9a-a162-4555-a074-f0c31ebde48f' width='400' /># myList
+<img src='https://github.com/MarcosVel/myList/assets/62637265/e9c64a9a-a162-4555-a074-f0c31ebde48f' width='400' />
